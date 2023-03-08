@@ -22,7 +22,11 @@ with open("awp_map_new.json", "r") as f:
 df = pd.read_csv("awp_csv_new.csv", dtype={"country_name": str})
 
 # Build your components
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
+
+#app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
+
+app = dash.Dash(__name__, server=pywsgi.WSGIServer(('0.0.0.0', 8056)), external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
+server = app.server
 
 mytitle = dcc.Markdown(children='#Awp')
 map_graph = dcc.Graph(id='map-graph', figure={})
