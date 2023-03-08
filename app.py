@@ -1,4 +1,3 @@
-#!/home/seleshiget/venv/bin/python
 import json
 import io
 import urllib.parse
