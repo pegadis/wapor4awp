@@ -23,10 +23,8 @@ df = pd.read_csv("awp_csv_new.csv", dtype={"country_name": str})
 
 # Build your components
 
-#app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
-
-app = dash.Dash(__name__, server=pywsgi.WSGIServer(('0.0.0.0', 8056)), external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
-server = app.server
+server = Flask(__name__)
+app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.LUX, "https://codepen.io/chriddyp/pen/bWLwgP.css"])
 
 mytitle = dcc.Markdown(children='#Awp')
 map_graph = dcc.Graph(id='map-graph', figure={})
@@ -125,7 +123,7 @@ def update_graph(click_data, dropdown_value, download_clicks, line_chart_figure)
     
     
 
-
 # Run app
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8056)
+    server = pywsgi.WSGIServer(('0.0.0.0', 8056), app.server)
+    server.serve_forever()
