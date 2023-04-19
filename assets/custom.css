@@ -1,0 +1,8 @@
+/* Set the height for the parent container elements of the graphs */
+.row > div > .text-center {
+    height: 100%;
+}
+
+.animation-controls {
+  z-index: 1000;
+}
