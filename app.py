@@ -15,6 +15,7 @@ from dash import dcc
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from dash import html
+
 from dash.dependencies import ClientsideFunction
 import shapely.geometry
 from shapely.geometry import Polygon
@@ -22,6 +23,8 @@ from shapely.geometry import shape
 import numpy as np
 
 
+
+from gevent import pywsgi
 
 
 
@@ -284,7 +287,7 @@ def update_graph(click_data, dropdown_value, relayout_data, download_clicks, lin
     #Add the units to the color bar
     map_fig.update_layout(coloraxis_colorbar_title=colorbar_title)    
     
-    map_fig.update_layout(autosize=True, margin=dict(l=80, r=50, t=50, b=50))
+    map_fig.update_layout(autosize=True, margin=dict(l=30, r=30, t=30, b=30))
     
 
 
